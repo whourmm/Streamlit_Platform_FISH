@@ -32,13 +32,6 @@ selected_tools = st.sidebar.multiselect("Choose tools:", tools, default=tools[:3
 # Filter data based on selection
 filtered_data = df[df["Tool"].isin(selected_tools)]
 
-
-import streamlit as st
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-
 def plot_radar_chart(data, labels, title, is_fish_summary=False, first=False):
     N = len(labels)
     theta = np.linspace(0, 2 * np.pi, N, endpoint=False)
