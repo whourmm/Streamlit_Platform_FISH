@@ -46,7 +46,7 @@ export default function BusinessAssessmentPage() {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Business Assessment</h1>
       <div className="bg-white rounded-lg shadow-lg p-6">
-        <Visualization data={data} maxValue={5} recommend={recommend} />
+        {/* <Visualization data={data} maxValue={5} recommend={recommend} /> */}
         <CircularHeatMapVisualization
           data={data}
           maxValue={5}
