@@ -2,6 +2,7 @@
 
 import Visualization from "@/components/visualization";
 import CircularHeatMapVisualization from "@/components/CircularHeatMapVisualization";
+// import DataVisualization from "@/components/Qua";
 
 export default function BusinessAssessmentPage() {
   const data = {
@@ -40,6 +41,23 @@ export default function BusinessAssessmentPage() {
     }, // Teal for Human Capital
   ];
 
+  const visualizationData = {
+    matchScore: 83,
+    traits: [
+      { name: "CAREFULNESS", value: 0.83 },
+      { name: "CREATIVITY", value: 0.6 },
+      { name: "PRECISION", value: 0.75 },
+      { name: "DECISIVINESS", value: 0.9 },
+      { name: "MOTIVATION", value: 0.95 },
+      { name: "SPEED", value: 0.5 },
+      { name: "ASSERTION", value: 0.4 },
+      { name: "INDEPENDENCE", value: 0.7 },
+    ],
+    testRatingStars: 4,
+    testRatingPartialStar: true,
+    traitDescriptions: ["Rational", "Listening", "Optimistic", "Competitive"],
+  };
+
   const recommend = "The is recommended data. Coming Soom...";
 
   return (
@@ -52,6 +70,7 @@ export default function BusinessAssessmentPage() {
           maxValue={5}
           recommend={recommend}
         />
+        {/* <DataVisualization data={visualizationData} /> */}
       </div>
     </div>
   );

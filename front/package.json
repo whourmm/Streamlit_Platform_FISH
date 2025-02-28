@@ -22,7 +22,8 @@
     "react-d3-library": "^1.1.8",
     "react-dom": "^19.0.0",
     "react-plotly.js": "^2.6.0",
-    "react-plotlyjs": "^0.4.4"
+    "react-plotlyjs": "^0.4.4",
+    "recharts": "^2.15.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
