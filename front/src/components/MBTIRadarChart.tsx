@@ -785,7 +785,7 @@ const MBTIRadarChart = () => {
           className="transition-all duration-500"
         >
           {/* Create category background sections */}
-          {createCategorySections()}
+          {/* {createCategorySections()} */}
 
           {/* Create the grid */}
           {createGrid()}
@@ -794,7 +794,7 @@ const MBTIRadarChart = () => {
           {createAxes()}
 
           {/* Create data polygon */}
-          {createDataPolygon()}
+          {/* {createDataPolygon()} */}
 
           {/* Create data bars */}
           {createDataBars()}
