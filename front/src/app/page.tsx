@@ -2,7 +2,7 @@
 
 import Visualization from "@/components/visualization";
 import CircularHeatMapVisualization from "@/components/CircularHeatMapVisualization";
-// import DataVisualization from "@/components/Qua";
+import MBTIRadarChart from "@/components/MBTIRadarChart";
 
 export default function BusinessAssessmentPage() {
   const data = {
@@ -65,11 +65,12 @@ export default function BusinessAssessmentPage() {
       <h1 className="text-2xl font-bold mb-4">Business Assessment</h1>
       <div className="bg-white rounded-lg shadow-lg p-6">
         {/* <Visualization data={data} maxValue={5} recommend={recommend} /> */}
-        <CircularHeatMapVisualization
+        {/* <CircularHeatMapVisualization
           data={data}
           maxValue={5}
           recommend={recommend}
-        />
+        /> */}
+        <MBTIRadarChart />
         {/* <DataVisualization data={visualizationData} /> */}
       </div>
     </div>
