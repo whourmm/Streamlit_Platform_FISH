@@ -672,7 +672,7 @@ const MBTIRadarChart = () => {
   return (
     <div className="flex flex-col items-center w-full max-w-6xl mx-auto px-2 md:px-4">
       <h1 className="text-2xl md:text-3xl font-bold text-blue-600 mb-2 animate-pulse">
-        FISH CAPITAL
+        FISH CAPITAL: Design 2
       </h1>
 
       {/* View selector buttons with animation */}

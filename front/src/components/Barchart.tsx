@@ -276,7 +276,7 @@ const FISHCapitalBarChart = () => {
     <div className="flex flex-col items-center w-full max-w-6xl mx-auto p-4">
       {/* Header */}
       <h1 className="text-2xl md:text-3xl font-bold text-blue-600 mb-4">
-        FISH CAPITAL
+        FISH CAPITAL: Design 3
       </h1>
 
       {/* Controls row */}
@@ -341,133 +341,125 @@ const FISHCapitalBarChart = () => {
         ))}
       </div>
 
-      {/* Statistics display */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-2 mb-6 w-full">
-        {Object.entries(categoryStats).map(([category, value]) => {
-          const bgColor =
-            category !== "Total" ? CATEGORY_BG_COLORS[category] : "bg-blue-50";
-          const textColor =
-            category !== "Total"
-              ? CATEGORY_TEXT_COLORS[category]
-              : "text-blue-700";
+      {/* Side by side layout for scores and chart */}
+      <div className="flex flex-col lg:flex-row w-full gap-4 mb-6">
+        {/* Statistics display */}
+        <div className="lg:w-1/3 w-full">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-2 w-full">
+            {Object.entries(categoryStats).map(([category, value]) => {
+              const bgColor =
+                category !== "Total"
+                  ? CATEGORY_BG_COLORS[category]
+                  : "bg-blue-50";
+              const textColor =
+                category !== "Total"
+                  ? CATEGORY_TEXT_COLORS[category]
+                  : "text-blue-700";
 
-          return (
-            <div
-              key={category}
-              className={`text-center p-3 rounded ${bgColor} transition-all`}
-            >
-              <div className="text-sm text-black">{category}</div>
-              <div className={`text-xl font-bold ${textColor}`}>
-                {isAnimating ? "..." : value.toFixed(1)}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Bar chart */}
-      <div className="w-full bg-white rounded-lg shadow-md p-4">
-        <div className="space-y-4">
-          {sortedTypes.map((type) => {
-            const value = animatedData[type] || 0;
-            const percentage = (value / maxValue) * 100;
-            const category = getCategoryForType(type);
-
-            return (
-              <div key={type} className="space-y-1">
-                <div className="flex justify-between text-sm">
-                  <div className="font-medium truncate max-w-xs text-gray-500">
-                    {TYPE_DISPLAY_NAMES[type] || type}
-                  </div>
-                  <div className="font-bold text-black">
-                    {isAnimating ? "..." : data[type].toFixed(1)}
+              return (
+                <div
+                  key={category}
+                  className={`text-center p-3 rounded ${bgColor} transition-all`}
+                >
+                  <div className="text-sm text-black">{category}</div>
+                  <div className={`text-xl font-bold ${textColor}`}>
+                    {isAnimating ? "..." : value.toFixed(1)}
                   </div>
                 </div>
+              );
+            })}
+          </div>
 
-                <div className="relative h-6 bg-gray-100 rounded-full overflow-hidden">
-                  <div
-                    className={`absolute left-0 top-0 h-full rounded-full transition-all duration-1000 ${CATEGORY_COLORS[category]}`}
-                    style={{ width: `${percentage}%` }}
-                  ></div>
-
-                  {/* Markers for measurement */}
-                  <div className="absolute left-0 top-0 h-full w-full">
-                    {[0, 25, 50, 75, 100].map((marker) => (
-                      <div
-                        key={marker}
-                        className="absolute top-0 h-full border-r border-white opacity-50"
-                        style={{
-                          left: `${
-                            (marker / 100) * maxValue * (100 / maxValue)
-                          }%`,
-                        }}
-                      ></div>
-                    ))}
-                  </div>
+          {/* Legend */}
+          <div className="mt-4 grid grid-cols-1 gap-2 w-full">
+            {Object.entries(TYPE_CATEGORIES).map(([category, types]) => (
+              <div
+                key={category}
+                className={`p-2 rounded-lg ${CATEGORY_BG_COLORS[category]} border ${CATEGORY_BORDER_COLORS[category]}`}
+              >
+                <div
+                  className={`font-bold ${CATEGORY_TEXT_COLORS[category]} mb-1`}
+                >
+                  {category}
                 </div>
-
-                {/* Category tag */}
-                <div className="flex justify-between text-xs">
-                  <span
-                    className={`${CATEGORY_TEXT_COLORS[category]}  font-medium`}
-                  >
-                    {category}
-                  </span>
-
-                  {/* Scale markers */}
-                  <div className="text-black">
-                    {sortBy === "category" &&
-                      type ===
-                        sortedTypes.find(
-                          (t) => getCategoryForType(t) === category
-                        ) && (
-                        <div className="flex justify-between w-48 sm:w-64">
-                          {[0, 1, 2, 3, 4, 5].map((marker) => (
-                            <span key={marker} className="text-xs text-black">
-                              {marker}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                  </div>
+                <div className="text-xs text-black">
+                  {types.map((type) => (
+                    <div key={type} className="truncate">
+                      • {TYPE_DISPLAY_NAMES[type]}
+                    </div>
+                  ))}
                 </div>
               </div>
-            );
-          })}
-        </div>
-
-        {/* Scale indicator */}
-        <div className="mt-6 text-center">
-          <div className="flex justify-between px-4 text-xs text-black">
-            <span>0</span>
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>5</span>
+            ))}
           </div>
         </div>
-      </div>
 
-      {/* Legend */}
-      <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-2 w-full">
-        {Object.entries(TYPE_CATEGORIES).map(([category, types]) => (
-          <div
-            key={category}
-            className={`p-2 rounded-lg ${CATEGORY_BG_COLORS[category]} border ${CATEGORY_BORDER_COLORS[category]}`}
-          >
-            <div className={`font-bold ${CATEGORY_TEXT_COLORS[category]} mb-1`}>
-              {category}
-            </div>
-            <div className="text-xs text-black">
-              {types.map((type) => (
-                <div key={type} className="truncate">
-                  • {TYPE_DISPLAY_NAMES[type]}
+        {/* Bar chart */}
+        <div className="lg:w-2/3 w-full bg-white rounded-lg shadow-md p-4">
+          <div className="space-y-3">
+            {sortedTypes.map((type) => {
+              const value = animatedData[type] || 0;
+              const percentage = (value / maxValue) * 100;
+              const category = getCategoryForType(type);
+
+              return (
+                <div key={type} className="space-y-1">
+                  <div className="flex justify-between text-sm">
+                    <div className="font-medium truncate max-w-xs text-gray-500">
+                      {TYPE_DISPLAY_NAMES[type] || type}
+                    </div>
+                    <div className="font-bold text-black">
+                      {isAnimating ? "..." : data[type].toFixed(1)}
+                    </div>
+                  </div>
+
+                  <div className="relative h-5 bg-gray-100 rounded-full overflow-hidden">
+                    <div
+                      className={`absolute left-0 top-0 h-full rounded-full transition-all duration-1000 ${CATEGORY_COLORS[category]}`}
+                      style={{ width: `${percentage}%` }}
+                    ></div>
+
+                    {/* Markers for measurement */}
+                    <div className="absolute left-0 top-0 h-full w-full">
+                      {[0, 25, 50, 75, 100].map((marker) => (
+                        <div
+                          key={marker}
+                          className="absolute top-0 h-full border-r border-white opacity-50"
+                          style={{
+                            left: `${
+                              (marker / 100) * maxValue * (100 / maxValue)
+                            }%`,
+                          }}
+                        ></div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Category tag */}
+                  <div className="flex justify-between text-xs">
+                    <span
+                      className={`${CATEGORY_TEXT_COLORS[category]} font-medium`}
+                    >
+                      {category}
+                    </span>
+                  </div>
                 </div>
-              ))}
+              );
+            })}
+          </div>
+
+          {/* Scale indicator */}
+          <div className="mt-4 text-center">
+            <div className="flex justify-between px-4 text-xs text-black">
+              <span>0</span>
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+              <span>4</span>
+              <span>5</span>
             </div>
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );

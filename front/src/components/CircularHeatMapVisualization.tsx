@@ -341,9 +341,9 @@ const CircularRadarVisualization: React.FC<VisualizationProps> = ({
   return (
     <div className="w-full max-w-4xl mx-auto px-2">
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-center mb-4">
-          Comprehensive Capital Assessment
-        </h2>
+        <h1 className="text-center text-2xl md:text-3xl font-bold text-blue-600 mb-2 animate-pulse w-full">
+          FISH CAPITAL: Design 1
+        </h1>
 
         {/* View selector */}
         <div className="flex justify-center gap-4 mb-4">

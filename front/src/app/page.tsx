@@ -71,7 +71,9 @@ export default function BusinessAssessmentPage() {
           maxValue={5}
           recommend={recommend}
         />
+        <div className="mt-10 h-20"></div>
         <MBTIRadarChart />
+        <div className="mt-10 h-20"></div>
         <FISHCapitalBarChart />
         {/* <DataVisualization data={visualizationData} /> */}
       </div>
